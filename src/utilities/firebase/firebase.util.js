@@ -25,11 +25,16 @@ googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = getAuth();
+export const auth = getAuth(firebaseApp);
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
 export const db = getFirestore();
+
+// the extra functinality that I implemenet (in order to send the display name
+// in the firebase db) is to append am additionalInformation object in userDocRef method)
+// this object will be empty and will have the display name in cases that this will not
+// pass as property in the user object (as it happens when will logon using google popup)
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
